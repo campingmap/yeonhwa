@@ -29,7 +29,17 @@ python3 -m http.server 8080 --directory dist
 - `dist/assets/`: 웹용 작품 이미지, 포스터, 전시 일정
 - `.openai/hosting.json`: Sites 배포 설정
 
-현재 공유 링크는 Sites 배포 주소를 사용합니다. 다른 주소로 배포할 경우 `dist/app.js`의 `exhibitionShare.url`과 `dist/index.html`의 `og:image`를 갱신합니다.
+현재 공유 링크는 https://campingmap.github.io/yeonhwa/ 를 사용합니다. 다른 주소로 배포할 경우 `dist/app.js`의 `exhibitionShare.url`과 `dist/index.html`의 `og:image`를 갱신합니다.
 카카오톡 전용 카드 공유 API는 아직 연결하지 않았습니다.
 
 작품 이미지의 저작권은 작가에게 있습니다.
+
+## GitHub Pages
+
+`gh-pages` 브랜치에서 정적 사이트를 배포합니다. `main`의 `dist/` 폴더를 갱신한 뒤 다음 명령으로 반영합니다.
+
+```sh
+git subtree split --prefix dist -b pages-release
+git push github pages-release:gh-pages
+git branch -D pages-release
+```
