@@ -37,7 +37,25 @@ function initializeKakaoShare() {
 }
 
 initializeKakaoShare();
-document.querySelector('#share-exhibition').addEventListener('click', () => {
+const shareDialog = document.querySelector('#share-dialog');
+document.querySelector('#share-exhibition').addEventListener('click', () => shareDialog.showModal());
+document.querySelector('#close-share').addEventListener('click', () => shareDialog.close());
+shareDialog.addEventListener('click', event => {
+ if (event.target !== shareDialog) return;
+ const bounds = shareDialog.getBoundingClientRect();
+ if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) shareDialog.close();
+});
+document.querySelector('#share-copy-link').addEventListener('click', async () => {
+ shareDialog.close();
+ try {
+  await navigator.clipboard.writeText(EXHIBITION_URL);
+  toast('전시 홈페이지 링크를 복사했습니다.');
+ } catch {
+  window.prompt('아래 전시 링크를 복사해 주세요.', EXHIBITION_URL);
+ }
+});
+document.querySelector('#share-kakaotalk').addEventListener('click', () => {
+ shareDialog.close();
  try {
   if (!initializeKakaoShare()) {
    toast('카카오톡 공유를 불러오지 못했습니다. 연결 상태를 확인하고 다시 눌러 주세요.');
