@@ -24,16 +24,28 @@ document.querySelector('#copy-address').addEventListener('click', async () => {
  catch { toast(address); }
 });
 
-const exhibitionShare = {
- title: '붉은 장미의 언어 · 김수연 개인전',
- text: '김수연 일곱 번째 개인전에 초대합니다. 2026.11.21–12.29 · 물빛복합문화센터',
- url: 'https://campingmap.github.io/yeonhwa/'
-};
-document.querySelector('#share-exhibition').addEventListener('click', async () => {
- if (navigator.share) {
-  try { await navigator.share(exhibitionShare); return; }
-  catch (error) { if (error.name === 'AbortError') return; }
+// Kakao JavaScript keys are public browser identifiers, restricted by SDK domains.
+const KAKAO_JAVASCRIPT_KEY = 'b0d8d93e30161d4966c224df80323774';
+const KAKAO_TEMPLATE_ID = 138624;
+const EXHIBITION_URL = 'https://campingmap.github.io/yeonhwa/';
+
+function initializeKakaoShare() {
+ const kakao = window.Kakao;
+ if (!kakao || !kakao.Share) return false;
+ if (!kakao.isInitialized()) kakao.init(KAKAO_JAVASCRIPT_KEY);
+ return true;
+}
+
+initializeKakaoShare();
+document.querySelector('#share-exhibition').addEventListener('click', () => {
+ try {
+  if (!initializeKakaoShare()) {
+   toast('카카오톡 공유를 불러오지 못했습니다. 연결 상태를 확인하고 다시 눌러 주세요.');
+   return;
+  }
+  // Run directly in the click event so the browser can open the share window.
+  window.Kakao.Share.sendCustom({ templateId: KAKAO_TEMPLATE_ID });
+ } catch (error) {
+  toast('카카오톡 공유를 열지 못했습니다. 잠시 후 다시 시도해 주세요.');
  }
- try { await navigator.clipboard.writeText(exhibitionShare.url); toast('전시 링크를 복사했습니다. 카카오톡에 붙여넣어 공유해 주세요.'); }
- catch { window.prompt('아래 전시 링크를 복사해 공유해 주세요.', exhibitionShare.url); }
 });
