@@ -23,3 +23,17 @@ document.querySelector('#copy-address').addEventListener('click', async () => {
  try { await navigator.clipboard.writeText(address); toast('전시장 주소를 복사했습니다.'); }
  catch { toast(address); }
 });
+
+const exhibitionShare = {
+ title: '붉은 장미의 언어 · 김수연 개인전',
+ text: '김수연 일곱 번째 개인전에 초대합니다. 2026.11.21–12.29 · 물빛복합문화센터',
+ url: 'https://suyeon-red-rose-2026.sound-calf-7788.chatgpt.site/'
+};
+document.querySelector('#share-exhibition').addEventListener('click', async () => {
+ if (navigator.share) {
+  try { await navigator.share(exhibitionShare); return; }
+  catch (error) { if (error.name === 'AbortError') return; }
+ }
+ try { await navigator.clipboard.writeText(exhibitionShare.url); toast('전시 링크를 복사했습니다. 카카오톡에 붙여넣어 공유해 주세요.'); }
+ catch { window.prompt('아래 전시 링크를 복사해 공유해 주세요.', exhibitionShare.url); }
+});
