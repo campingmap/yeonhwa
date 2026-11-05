@@ -29,8 +29,8 @@ python3 -m http.server 8080 --directory dist
 - `dist/assets/`: 웹용 작품 이미지, 포스터, 전시 일정
 - `.openai/hosting.json`: Sites 배포 설정
 
-현재 공유 링크는 https://campingmap.github.io/yeonhwa/ 를 사용합니다. 다른 주소로 배포할 경우 `dist/app.js`의 `exhibitionShare.url`과 `dist/index.html`의 `og:image`를 갱신합니다.
-카카오톡 전용 카드 공유 API는 아직 연결하지 않았습니다.
+현재 공유 링크는 https://campingmap.github.io/yeonhwa/ 를 사용합니다. 다른 주소로 배포할 경우 `dist/app.js`의 `EXHIBITION_URL`과 `dist/index.html`의 `og:image`를 갱신합니다.
+카카오톡 공유는 앱 `1637962`의 사용자 정의 템플릿 `138624`를 사용합니다. Kakao JavaScript SDK 2.8.4를 불러오며, JavaScript 키에 등록된 SDK 도메인에서 동작합니다. 메시지 내용과 홈페이지·지도 버튼 링크는 카카오 템플릿 편집기에서 관리합니다.
 
 작품 이미지의 저작권은 작가에게 있습니다.
 
