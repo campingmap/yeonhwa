@@ -31,9 +31,9 @@ const EXHIBITION_URL = 'https://campingmap.github.io/yeonhwa/';
 
 function initializeKakaoShare() {
  const kakao = window.Kakao;
- if (!kakao || !kakao.Share) return false;
+ if (!kakao || typeof kakao.init !== 'function') return false;
  if (!kakao.isInitialized()) kakao.init(KAKAO_JAVASCRIPT_KEY);
- return true;
+ return !!kakao.Share;
 }
 
 initializeKakaoShare();
