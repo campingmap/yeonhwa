@@ -27,7 +27,7 @@ document.querySelector('#copy-address').addEventListener('click', async () => {
 const exhibitionShare = {
  title: '붉은 장미의 언어 · 김수연 개인전',
  text: '김수연 일곱 번째 개인전에 초대합니다. 2026.11.21–12.29 · 물빛복합문화센터',
- url: 'https://suyeon-red-rose-2026.sound-calf-7788.chatgpt.site/'
+ url: 'https://campingmap.github.io/yeonhwa/'
 };
 document.querySelector('#share-exhibition').addEventListener('click', async () => {
  if (navigator.share) {
