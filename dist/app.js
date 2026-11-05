@@ -74,7 +74,7 @@ function updateBgmButton() {
  const playing = !bgm.paused && !bgm.ended;
  bgmToggle.setAttribute('aria-pressed', String(playing));
  bgmToggle.setAttribute('aria-label', playing ? '배경음악 끄기' : '배경음악 켜기');
- document.querySelector('#bgm-label').textContent = playing ? 'BGM ON' : 'BGM OFF';
+ document.querySelector('#bgm-label').textContent = playing ? 'BGM ON · 음악 끄기' : 'BGM OFF · 음악 켜기';
 }
 bgm.volume = 0.28;
 bgmToggle.addEventListener('click', async () => {
