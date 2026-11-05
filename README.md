@@ -43,3 +43,7 @@ git subtree split --prefix dist -b pages-release
 git push github pages-release:gh-pages
 git branch -D pages-release
 ```
+
+## 배경음악 및 영상
+
+`Reverie` — Scott Buckley (CC BY 4.0, https://www.scottbuckley.com.au/library/reverie/). 홈페이지의 BGM ON/OFF 버튼으로 재생하며, 브라우저 자동재생 제한을 고려해 처음에는 꺼져 있습니다. `video.html`의 20초 작품 영상에는 같은 곡의 시작 20초를 페이드 인·아웃하여 넣었습니다. 영상과 웹페이지에 출처를 표시합니다.

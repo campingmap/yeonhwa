@@ -67,3 +67,26 @@ document.querySelector('#share-kakaotalk').addEventListener('click', () => {
   toast('카카오톡 공유를 열지 못했습니다. 잠시 후 다시 시도해 주세요.');
  }
 });
+
+const bgm = document.querySelector('#exhibition-bgm');
+const bgmToggle = document.querySelector('#bgm-toggle');
+function updateBgmButton() {
+ const playing = !bgm.paused && !bgm.ended;
+ bgmToggle.setAttribute('aria-pressed', String(playing));
+ bgmToggle.setAttribute('aria-label', playing ? '배경음악 끄기' : '배경음악 켜기');
+ document.querySelector('#bgm-label').textContent = playing ? 'BGM ON' : 'BGM OFF';
+}
+bgm.volume = 0.28;
+bgmToggle.addEventListener('click', async () => {
+ if (!bgm.paused) { bgm.pause(); return; }
+ try { await bgm.play(); }
+ catch (error) {
+  if (error.name !== 'AbortError') toast('음악을 재생하지 못했습니다. 다시 눌러 주세요.');
+  updateBgmButton();
+ }
+});
+bgm.addEventListener('playing', updateBgmButton);
+bgm.addEventListener('pause', updateBgmButton);
+bgm.addEventListener('ended', updateBgmButton);
+bgm.addEventListener('error', () => { updateBgmButton(); toast('음악을 불러오지 못했습니다. 연결 상태를 확인해 주세요.'); });
+window.addEventListener('pagehide', () => bgm.pause());
